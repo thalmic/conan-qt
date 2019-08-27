@@ -251,7 +251,12 @@ class QtConan(ConanFile):
             pack_names = []
             if tools.os_info.is_linux:
                 if tools.os_info.with_apt:
-                    pack_names = ["libxcb1-dev", "libx11-dev", "libc6-dev"]
+                    pack_names = ["libc6-dev"]
+                    if self.options.GUI:
+                        pack_names.extend(["libxcb1-dev", "libx11-dev", "libxcb-icccm4-dev", "libxcb-image0-dev",
+                                           "libxcb-keysyms1-dev", "libxcb-randr0-dev", "libxcb-render0-dev",
+                                           "libxcb-render-util0-dev", "libxcb-shape0-dev", "libxcb-shm0-dev",
+                                           "libxcb-sync-dev", "libxcb-xfixes0-dev", "libxcb-xinerama0-dev"])
                     if self.options.opengl == "desktop":
                         pack_names.append("libgl1-mesa-dev")
                     elif self.options.opengl == "es2":
@@ -474,7 +479,7 @@ class QtConan(ConanFile):
             args.append("-psql_config " + os.path.join(self.deps_cpp_info['libpq'].rootpath, "bin", "pg_config"))
         if self.settings.os == "Linux":
             if self.options.GUI:
-                args.append("-qt-xcb")
+                args.append("-system-xcb")
         elif self.settings.os == "Macos":
             args += ["-no-framework"]
         elif self.settings.os == "Android":

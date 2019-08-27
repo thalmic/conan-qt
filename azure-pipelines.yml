@@ -18,14 +18,6 @@ jobs:
       CONAN_PASSWORD: $(CONAN_PASSWORD)
   strategy:
     matrix:
-      Gcc 4.9 x86:
-        CONAN_GCC_VERSIONS: 4.9
-        CONAN_DOCKER_IMAGE: conanio/gcc49
-        CONAN_ARCHS: "x86"
-      Gcc 4.9 x86_64:
-        CONAN_GCC_VERSIONS: 4.9
-        CONAN_DOCKER_IMAGE: conanio/gcc49
-        CONAN_ARCHS: "x86_64"
       Gcc 5 x86:
         CONAN_GCC_VERSIONS: 5
         CONAN_DOCKER_IMAGE: conanio/gcc5
