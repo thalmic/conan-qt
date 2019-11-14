@@ -2,22 +2,20 @@ on: [push, pull_request]
 
 jobs:
   gcc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
       matrix:
-        version: ["4.9", "5", "6", "7", "8"]
+        version: ["4.9", "5", "6", "7", "8", "9"]
         arch: [x86, x86_64]
         buildType: [Debug, Release]
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
         with:
-            fetch-depth: 1
+          python-version: '3.8'
       - name: install
         run: |
-          sudo apt-get install python3-setuptools
-          sudo update-alternatives --remove python /usr/bin/python2
-          sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
           chmod +x .ci/install.sh
           ./.ci/install.sh
       - name: run
