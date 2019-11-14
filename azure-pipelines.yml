@@ -21,6 +21,9 @@ jobs:
         Write-Host "##vso[task.prependpath]C:\Python3\Scripts"
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
         C:\Python3\python.exe get-pip.py
+        Remove-Item C:\py3-setup.exe
+        Remove-Item get-pip.py
+        Remove-Item $env:TMP -Recurse -Force
     displayName: UsePythonVersion for VS 2015
   - script: |
       python --version
