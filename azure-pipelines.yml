@@ -7,6 +7,7 @@ jobs:
     vmImage: $(AZP_BUILD_WORKER_IMAGE)
   steps:
   - task: UsePythonVersion@0
+    condition: ne(variables.CONAN_VISUAL_VERSIONS, 14)
     inputs:
       versionSpec: $(PYTHON_VERSION)
   - script: |
@@ -21,12 +22,10 @@ jobs:
     matrix:
       VS 2015 Release:
         AZP_BUILD_WORKER_IMAGE: vs2015-win2012r2
-        PYTHON_VERSION: "3.6"
         CONAN_VISUAL_VERSIONS: 14
         CONAN_BUILD_TYPES: Release
       VS 2015 Debug:
         AZP_BUILD_WORKER_IMAGE: vs2015-win2012r2
-        PYTHON_VERSION: "3.6"
         CONAN_VISUAL_VERSIONS: 14
         CONAN_BUILD_TYPES: Debug
       VS 2017 Release:
