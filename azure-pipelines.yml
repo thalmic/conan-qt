@@ -15,23 +15,25 @@ jobs:
     inputs:
       targetType: inline
       script: |
-        python --version
         Invoke-WebRequest https://www.python.org/ftp/python/3.7.1/python-3.7.1-amd64-webinstall.exe -OutFile C:\py3-setup.exe
         C:\py3-setup.exe /quiet PrependPath=1 InstallAllUsers=1 Include_launcher=1 InstallLauncherAllUsers=1 Include_test=0 Include_doc=0 Include_dev=0 Include_debug=0 Include_tcltk=0 TargetDir=C:\Python37 | Out-Null
         Write-Host "##vso[task.prependpath]C:\Python37"
         Write-Host "##vso[task.prependpath]C:\Python37\Scripts"
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
         C:\Python37\python.exe get-pip.py
+    displayName: UsePythonVersion for VS 2015
   - script: |
       python --version
-      echo %PATH%
       pip --version
       pip install bincrafters_package_tools
       conan user
+    displayName: Install Conan
+  - script: |
       python build.py
     env:
       CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
       CONAN_PASSWORD: $(CONAN_PASSWORD)
+    displayName: Run
 
   strategy:
     matrix:
@@ -70,14 +72,19 @@ jobs:
       versionSpec: $(PYTHON_VERSION)
   - script: |
       pip install --upgrade pip
+      python --version
+      pip --version
       chmod +x .ci/install.sh
       source ./.ci/install.sh
       chmod +x .ci/run.sh
+    displayName: Install Conan
+  - script: |
       source ./.ci/run.sh
     env:
       CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
       CONAN_PASSWORD: $(CONAN_PASSWORD)
-
+    displayName: Run
+  
   strategy:
     matrix:
       Apple-Clang 10 Release:
