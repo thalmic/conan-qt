@@ -42,3 +42,34 @@ jobs:
         AZP_BUILD_WORKER_IMAGE: windows-2019
         CONAN_VISUAL_VERSIONS: 16
         CONAN_BUILD_TYPES: Debug
+
+
+- job: macOS
+  pool:
+    vmImage: $(AZP_BUILD_WORKER_IMAGE)
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.8"
+  - script: |
+      pip install --upgrade pip
+      chmod +x .ci/install.sh
+      ./.ci/install.sh
+      chmod +x .ci/run.sh
+      ./.ci/run.sh
+    env:
+      CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
+      CONAN_PASSWORD: $(CONAN_PASSWORD)
+
+  strategy:
+    matrix:
+      Apple-Clang 10 Page 1:
+        AZP_BUILD_WORKER_IMAGE: macOS-10.13
+        CONAN_APPLE_CLANG_VERSIONS: 10.0
+        CONAN_CURRENT_PAGE: 1
+        CONAN_TOTAL_PAGES: 2
+      Apple-Clang 10 Page 2:
+        AZP_BUILD_WORKER_IMAGE: macOS-10.13
+        CONAN_APPLE_CLANG_VERSIONS: 10.0
+        CONAN_CURRENT_PAGE: 2
+        CONAN_TOTAL_PAGES: 2
