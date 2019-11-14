@@ -22,9 +22,9 @@ jobs:
   - script: |
       python --version
       set PATH=c:\py3;c:\py3/Scripts/;%PATH%
-      pyton --version
-      pip --version
+      python --version
       python get-pip.py
+      pip --version
       pip install bincrafters_package_tools
       conan user
       python build.py
