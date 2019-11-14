@@ -2,6 +2,40 @@ variables:
   PYTHON_VERSION: "3.8"
 
 jobs:
+- job: macOS
+  pool:
+    vmImage: $(AZP_BUILD_WORKER_IMAGE)
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: $(PYTHON_VERSION)
+  - script: |
+      pip install --upgrade pip
+      python --version
+      pip --version
+      chmod +x .ci/install.sh
+      ./.ci/install.sh
+      chmod +x .ci/run.sh
+    displayName: Install Conan
+  - script: |
+      ./.ci/run.sh
+    env:
+      CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
+      CONAN_PASSWORD: $(CONAN_PASSWORD)
+    displayName: Run
+  
+  strategy:
+    matrix:
+      Apple-Clang 10 Release:
+        AZP_BUILD_WORKER_IMAGE: macOS-10.13
+        CONAN_APPLE_CLANG_VERSIONS: 10.0
+        CONAN_BUILD_TYPES: Release
+      Apple-Clang 10 Debug:
+        AZP_BUILD_WORKER_IMAGE: macOS-10.13
+        CONAN_APPLE_CLANG_VERSIONS: 10.0
+        CONAN_BUILD_TYPES: Debug
+
+
 - job: Windows
   pool:
     vmImage: $(AZP_BUILD_WORKER_IMAGE)
@@ -67,38 +101,4 @@ jobs:
       VS 2019 Debug:
         AZP_BUILD_WORKER_IMAGE: windows-2019
         CONAN_VISUAL_VERSIONS: 16
-        CONAN_BUILD_TYPES: Debug
-
-
-- job: macOS
-  pool:
-    vmImage: $(AZP_BUILD_WORKER_IMAGE)
-  steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: $(PYTHON_VERSION)
-  - script: |
-      pip install --upgrade pip
-      python --version
-      pip --version
-      chmod +x .ci/install.sh
-      ./.ci/install.sh
-      chmod +x .ci/run.sh
-    displayName: Install Conan
-  - script: |
-      ./.ci/run.sh
-    env:
-      CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
-      CONAN_PASSWORD: $(CONAN_PASSWORD)
-    displayName: Run
-  
-  strategy:
-    matrix:
-      Apple-Clang 10 Release:
-        AZP_BUILD_WORKER_IMAGE: macOS-10.13
-        CONAN_APPLE_CLANG_VERSIONS: 10.0
-        CONAN_BUILD_TYPES: Release
-      Apple-Clang 10 Debug:
-        AZP_BUILD_WORKER_IMAGE: macOS-10.13
-        CONAN_APPLE_CLANG_VERSIONS: 10.0
         CONAN_BUILD_TYPES: Debug
