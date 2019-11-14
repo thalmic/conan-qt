@@ -21,7 +21,9 @@ jobs:
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
   - script: |
       python --version
+      echo %PATH%
       set PATH=c:\py3;c:\py3/Scripts/;%PATH%
+      echo %PATH%
       python --version
       python get-pip.py
       pip --version
