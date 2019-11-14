@@ -22,6 +22,7 @@ jobs:
   - script: |
       @echo ##vso[task.prependpath]C:\Python37
       @echo ##vso[task.prependpath]C:\Python37\Scripts
+  - script: |
       python --version
       echo %PATH%
       set PATH=C:\py3;C:\py3\Scripts\;%PATH%
