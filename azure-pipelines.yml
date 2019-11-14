@@ -7,11 +7,9 @@ jobs:
     inputs:
       versionSpec: "3.8"
   - script: |
-      pip install --upgrade pip
-      chmod +x .ci/install.sh
-      ./.ci/install.sh
-      chmod +x .ci/run.sh
-      ./.ci/run.sh
+      pip install bincrafters_package_tools
+      conan user
+      python build.py
     env:
       CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
       CONAN_PASSWORD: $(CONAN_PASSWORD)
