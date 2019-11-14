@@ -23,7 +23,7 @@ jobs:
         C:\Python3\python.exe get-pip.py
         Remove-Item C:\py3-setup.exe
         Remove-Item get-pip.py
-        Remove-Item $env:TMP -Recurse -Force
+        Remove-Item -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue
     displayName: UsePythonVersion for VS 2015
   - script: |
       python --version
