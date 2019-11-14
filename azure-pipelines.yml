@@ -5,6 +5,7 @@ jobs:
 - job: Windows
   pool:
     vmImage: $(AZP_BUILD_WORKER_IMAGE)
+  timeoutInMinutes: 180
   steps:
   - task: UsePythonVersion@0
     condition: ne(variables.CONAN_VISUAL_VERSIONS, 14)
