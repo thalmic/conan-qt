@@ -1,0 +1,33 @@
+strategy:
+  matrix:
+    VS 2015 Release:
+      AZP_BUILD_WORKER_IMAGE: vs2015-win2012r2
+      CONAN_VISUAL_VERSIONS: 14
+      CONAN_BUILD_TYPES: Release
+    VS 2017 Release:
+      AZP_BUILD_WORKER_IMAGE: vs2017-win2016
+      CONAN_VISUAL_VERSIONS: 15
+      CONAN_BUILD_TYPES: Release
+    VS 2019 Release:
+      AZP_BUILD_WORKER_IMAGE: windows-2019
+      CONAN_VISUAL_VERSIONS: 16
+      CONAN_BUILD_TYPES: Release
+
+timeoutInMinutes: 180
+
+pool:
+  vmImage: $(AZP_BUILD_WORKER_IMAGE)
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: "3.8"
+- script: |
+    pip install --upgrade pip
+    chmod +x .ci/install.sh
+    ./.ci/install.sh
+    chmod +x .ci/run.sh
+    ./.ci/run.sh
+  env:
+    CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
+    CONAN_PASSWORD: $(CONAN_PASSWORD)
