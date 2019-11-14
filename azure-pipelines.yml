@@ -1,3 +1,6 @@
+variables:
+  PYTHON_VERSION: "3.8"
+
 jobs:
 - job: Windows
   pool:
@@ -5,7 +8,7 @@ jobs:
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: "3.7"
+      versionSpec: $(PYTHON_VERSION)
   - script: |
       pip install bincrafters_package_tools
       conan user
@@ -18,10 +21,12 @@ jobs:
     matrix:
       VS 2015 Release:
         AZP_BUILD_WORKER_IMAGE: vs2015-win2012r2
+        PYTHON_VERSION: "3.6"
         CONAN_VISUAL_VERSIONS: 14
         CONAN_BUILD_TYPES: Release
       VS 2015 Debug:
         AZP_BUILD_WORKER_IMAGE: vs2015-win2012r2
+        PYTHON_VERSION: "3.6"
         CONAN_VISUAL_VERSIONS: 14
         CONAN_BUILD_TYPES: Debug
       VS 2017 Release:
@@ -48,13 +53,13 @@ jobs:
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: "3.8"
+      versionSpec: $(PYTHON_VERSION)
   - script: |
       pip install --upgrade pip
       chmod +x .ci/install.sh
-      ./.ci/install.sh
+      source ./.ci/install.sh
       chmod +x .ci/run.sh
-      ./.ci/run.sh
+      source ./.ci/run.sh
     env:
       CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
       CONAN_PASSWORD: $(CONAN_PASSWORD)
