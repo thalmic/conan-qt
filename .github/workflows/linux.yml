@@ -6,7 +6,7 @@ env:
   CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
 
 jobs:
-  gcc:
+  Linux Gcc:
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
@@ -30,7 +30,7 @@ jobs:
           chmod +x .ci/run.sh
           ./.ci/run.sh
 
-  clang:
+  Linux Clang:
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
