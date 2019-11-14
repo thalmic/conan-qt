@@ -20,7 +20,7 @@ jobs:
         Write-Host "##vso[task.prependpath]C:\Python3"
         Write-Host "##vso[task.prependpath]C:\Python3\Scripts"
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
-        C:\Python37\python.exe get-pip.py
+        C:\Python3\python.exe get-pip.py
     displayName: UsePythonVersion for VS 2015
   - script: |
       python --version
