@@ -12,6 +12,7 @@ jobs:
       versionSpec: $(PYTHON_VERSION)
   - task: PowerShell@2
     condition: eq(variables.CONAN_VISUAL_VERSIONS, 14)
+    targetType: inline
     inputs:
       script: |
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
