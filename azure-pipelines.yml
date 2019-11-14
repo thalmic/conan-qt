@@ -16,7 +16,11 @@ jobs:
       targetType: inline
       script: |
         python --version
-        python3 --version
+        Invoke-WebRequest https://www.python.org/ftp/python/3.7.1/python-3.7.1-amd64-webinstall.exe -OutFile c:\py3-setup.exe
+        c:\py3-setup.exe -quiet PrependPath=1 InstallAllUsers=1 Include_launcher=1 InstallLauncherAllUsers=1 Include_test=0 Include_doc=0 Include_dev=0 Include_debug=0 Include_tcltk=0 TargetDir=c:\py3
+        @echo ##vso[task.prependpath]C:\py3
+        @echo ##vso[task.prependpath]C:\py3\Scripts
+        python --version
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
         python get-pip.py
   - script: |
