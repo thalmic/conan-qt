@@ -15,6 +15,8 @@ jobs:
     inputs:
       targetType: inline
       script: |
+        python --version
+        python3 --version
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
         python get-pip.py
   - script: |
