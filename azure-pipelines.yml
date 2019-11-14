@@ -25,7 +25,7 @@ jobs:
         Remove-Item C:\py3-setup.exe
         Remove-Item get-pip.py
         Remove-Item $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue
-        $rmvfolders = @( “C:\Windows\Temp\*”, “C:\Windows\Prefetch\*”, “C:\Documents and Settings\*\Local Settings\temp\*”, “C:\Users\*\Appdata\Local\Temp\*”, “C:\NPM\*“, “C:\java\*“, “C:\cordova\*“, “C:\Program Files\nodejs\*“, “C:\Python27\*“ )
+        $rmvfolders = @( “C:\NPM\*“, “C:\java\*“, “C:\cordova\*“, “C:\Program Files\nodejs\*“, “C:\Python27\*“, “C:\Program Files (x86)\GtkSharp\*“ )
         Remove-Item $rmvfolders -Recurse -Force
     displayName: UsePythonVersion for VS 2015
   - script: |
