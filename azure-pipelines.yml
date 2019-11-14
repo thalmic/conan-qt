@@ -75,11 +75,11 @@ jobs:
       python --version
       pip --version
       chmod +x .ci/install.sh
-      source ./.ci/install.sh
+      ./.ci/install.sh
       chmod +x .ci/run.sh
     displayName: Install Conan
   - script: |
-      source ./.ci/run.sh
+      ./.ci/run.sh
     env:
       CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
       CONAN_PASSWORD: $(CONAN_PASSWORD)
