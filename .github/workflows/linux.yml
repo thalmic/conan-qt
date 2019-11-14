@@ -3,6 +3,21 @@ on: [push, pull_request]
 env:
   CONAN_USE_DOCKER: 1
 
+stepconfig: &stepconfig:
+  steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+    - name: install
+      run: |
+        chmod +x .ci/install.sh
+        ./.ci/install.sh
+    - name: run
+      run: |
+        chmod +x .ci/run.sh
+        ./.ci/run.sh
+
 jobs:
   clang:
     runs-on: ubuntu-18.04
@@ -25,3 +40,13 @@ jobs:
         run: |
           chmod +x .ci/run.sh
           ./.ci/run.sh
+
+  gcc:
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ["4.9", "5", "6", "7", "8", "9"]
+    env:
+        CONAN_GCC_VERSIONS: ${{matrix.version}}
+    <<: *stepconfig
