@@ -31,7 +31,7 @@ jobs:
       VS 2017 Debug:
         AZP_BUILD_WORKER_IMAGE: vs2017-win2016
         CONAN_VISUAL_VERSIONS: 15
-        CONAN_BUILD_TYPES: ReDebuglease
+        CONAN_BUILD_TYPES: Debug
       VS 2019 Release:
         AZP_BUILD_WORKER_IMAGE: windows-2019
         CONAN_VISUAL_VERSIONS: 16
