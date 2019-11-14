@@ -5,7 +5,7 @@ jobs:
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: "3.8"
+      versionSpec: "3.7"
   - script: |
       pip install bincrafters_package_tools
       conan user
