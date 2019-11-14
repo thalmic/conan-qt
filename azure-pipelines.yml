@@ -63,13 +63,11 @@ jobs:
 
   strategy:
     matrix:
-      Apple-Clang 10 Page 1:
+      Apple-Clang 10 Release:
         AZP_BUILD_WORKER_IMAGE: macOS-10.13
         CONAN_APPLE_CLANG_VERSIONS: 10.0
-        CONAN_CURRENT_PAGE: 1
-        CONAN_TOTAL_PAGES: 2
-      Apple-Clang 10 Page 2:
+        CONAN_BUILD_TYPES: Release
+      Apple-Clang 10 Debug:
         AZP_BUILD_WORKER_IMAGE: macOS-10.13
         CONAN_APPLE_CLANG_VERSIONS: 10.0
-        CONAN_CURRENT_PAGE: 2
-        CONAN_TOTAL_PAGES: 2
+        CONAN_BUILD_TYPES: Debug
