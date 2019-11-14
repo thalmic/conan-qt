@@ -13,21 +13,20 @@ strategy:
       CONAN_VISUAL_VERSIONS: 16
       CONAN_BUILD_TYPES: Release
 
-timeoutInMinutes: 180
-
-pool:
-  vmImage: $(AZP_BUILD_WORKER_IMAGE)
-
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: "3.8"
-- script: |
-    pip install --upgrade pip
-    chmod +x .ci/install.sh
-    ./.ci/install.sh
-    chmod +x .ci/run.sh
-    ./.ci/run.sh
-  env:
-    CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
-    CONAN_PASSWORD: $(CONAN_PASSWORD)
+jobs:
+- job: Windows
+  pool:
+    vmImage: $(AZP_BUILD_WORKER_IMAGE)
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.8"
+  - script: |
+      pip install --upgrade pip
+      chmod +x .ci/install.sh
+      ./.ci/install.sh
+      chmod +x .ci/run.sh
+      ./.ci/run.sh
+    env:
+      CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
+      CONAN_PASSWORD: $(CONAN_PASSWORD)
