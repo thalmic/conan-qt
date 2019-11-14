@@ -22,7 +22,7 @@ jobs:
   - script: |
       python --version
       echo %PATH%
-      set PATH=c:\py3;c:\py3/Scripts/;%PATH%
+      set PATH=C:\py3;C:\py3\Scripts\;%PATH%
       echo %PATH%
       python --version
       python get-pip.py
