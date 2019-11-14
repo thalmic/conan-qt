@@ -18,11 +18,12 @@ jobs:
         python --version
         Invoke-WebRequest https://www.python.org/ftp/python/3.7.1/python-3.7.1-amd64-webinstall.exe -OutFile c:\py3-setup.exe
         c:\py3-setup.exe -quiet PrependPath=1 InstallAllUsers=1 Include_launcher=1 InstallLauncherAllUsers=1 Include_test=0 Include_doc=0 Include_dev=0 Include_debug=0 Include_tcltk=0 TargetDir=c:\py3
-        Write-Host "##vso[task.prependpath]C:\py3"
-        Write-Host "##vso[task.prependpath]C:\py3\Scripts"
         Invoke-WebRequest -OutFile get-pip.py https://bootstrap.pypa.io/get-pip.py
   - script: |
       python --version
+      set PATH=c:\py3;c:\py3/Scripts/;%PATH%
+      pyton --version
+      pip --version
       python get-pip.py
       pip install bincrafters_package_tools
       conan user
