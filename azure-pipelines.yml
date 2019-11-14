@@ -27,6 +27,7 @@ jobs:
         Remove-Item -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue
     displayName: UsePythonVersion for VS 2015
   - script: |
+      echo %PATH%
       python --version
       pip --version
       pip install bincrafters_package_tools
