@@ -12,8 +12,6 @@ class TestPackageConan(ConanFile):
     def build_requirements(self):
         if tools.os_info.is_windows and self.settings.compiler == "Visual Studio":
             self.build_requires("jom_installer/1.1.2@bincrafters/stable")
-        if tools.os_info.is_windows and "CONAN_BASH_PATH" not in os.environ:
-            self.build_requires("msys2/20161025")
         if not tools.which("meson"):
             self.build_requires("meson_installer/0.50.0@bincrafters/stable")
 
