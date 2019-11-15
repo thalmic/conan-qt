@@ -3,7 +3,7 @@ resources:
     - repository: templates
       type: github
       name: Croydon/templates
-      endpoint: templates
+      endpoint: Croydon
 
 jobs:
 - template: .ci/azure.yml@templates
