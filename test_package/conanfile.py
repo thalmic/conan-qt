@@ -15,7 +15,7 @@ class TestPackageConan(ConanFile):
         if tools.os_info.is_windows and "CONAN_BASH_PATH" not in os.environ:
             self.build_requires("msys2/20161025")
         if not tools.which("meson"):
-            self.build_requires("meson/0.52.0")
+            self.build_requires("meson_installer/0.50.0@bincrafters/stable")
 
     def _build_with_qmake(self):
         tools.mkdir("qmake_folder")
