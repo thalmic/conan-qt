@@ -1,3 +1,7 @@
+variables:
+  CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
+  CONAN_PASSWORD: $(CONAN_PASSWORD)
+
 resources:
   repositories:
     - repository: templates
