@@ -1,7 +1,3 @@
-variables:
-  CONAN_LOGIN_USERNAME: $(CONAN_LOGIN_USERNAME)
-  CONAN_PASSWORD: $(CONAN_PASSWORD)
-
 resources:
   repositories:
     - repository: templates
@@ -12,4 +8,6 @@ resources:
 jobs:
 - template: .ci/azure.yml@templates
   parameters:
+    conanLoginUsername: $(CONAN_LOGIN_USERNAME)
+    conanPassword: $(CONAN_PASSWORD)
     splitByBuildTypes: "true"
