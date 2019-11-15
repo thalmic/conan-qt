@@ -64,6 +64,7 @@ jobs:
     displayName: UsePythonVersion for VS 2015
   - script: |
       rmdir /S /Q C:\ProgramData\chocolatey
+      rmdir /S /Q C:\Strawberry\
       python --version
       pip --version
       pip install bincrafters_package_tools
