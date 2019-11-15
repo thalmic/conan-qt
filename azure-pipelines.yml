@@ -9,4 +9,5 @@ jobs:
 - template: .ci/azure.yml@templates
   parameters:
     vsVersions: "14,16"
-    appleClangVersions: ""
+    splitByBuildTypes: "false"
+    appleClangVersions: "10"
