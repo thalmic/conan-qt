@@ -38,11 +38,11 @@ jobs:
 
 - job: Windows
   pool:
-    ${{ if eq(variables.CONAN_VISUAL_VERSIONS, 14) }}:
+    $[ if eq(variables.CONAN_VISUAL_VERSIONS, 14) ]:
       vmImage: vs2015-win2012r2
-    ${{ if eq(variables.CONAN_VISUAL_VERSIONS, 15) }}:
+    $[ if eq(variables.CONAN_VISUAL_VERSIONS, 15) ]:
       vmImage: vs2017-win2016
-    ${{ if eq(variables.CONAN_VISUAL_VERSIONS, 16) }}:
+    $[ if eq(variables.CONAN_VISUAL_VERSIONS, 16) ]:
       vmImage: windows-2019
   timeoutInMinutes: 180
   steps:
