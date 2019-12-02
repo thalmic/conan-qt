@@ -16,7 +16,7 @@ class qt(Generator):
 
     @property
     def content(self):
-        return "[Paths]\nPrefix = %s\n" % self.conanfile.deps_cpp_info["qt"].rootpath.replace("\\", "/")
+        return "[Paths]\nPrefix = %s\n" % self.conanfile.deps_cpp_info["Qt"].rootpath.replace("\\", "/")
 
 
 def _getsubmodules():
@@ -43,7 +43,8 @@ class QtConan(ConanFile):
     _submodules = _getsubmodules()
 
     generators = "pkg_config"
-    name = "qt"
+    name = "Qt"
+    version = "5.12.5"
     description = "Qt is a cross-platform framework for graphical user interfaces."
     topics = ("conan", "qt", "ui")
     url = "https://github.com/bincrafters/conan-qt"
@@ -392,7 +393,7 @@ class QtConan(ConanFile):
         else:
             args.insert(0, "-shared")
         if self.options.multiconfiguration:
-            args.append("-debug-and-release")
+            args.append("-release")
         elif self.settings.build_type == "Debug":
             args.append("-debug")
         elif self.settings.build_type == "Release":
